@@ -174,7 +174,7 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=15]
 radius = 16.0
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
 collision_layer = 4
 script = ExtResource( 3 )
 max_fall_speed = 500
@@ -194,7 +194,7 @@ shape = SubResource( 14 )
 
 [node name="GunPivot" type="Node2D" parent="."]
 
-[node name="Revolver" type="Node2D" parent="GunPivot"]
+[node name="Revolver" type="Node2D" parent="GunPivot" groups=["Gun"]]
 position = Vector2( 16, 0 )
 script = ExtResource( 2 )
 
@@ -228,4 +228,11 @@ shape = SubResource( 15 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
+[node name="Label" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -34.0
+margin_right = 20.0
+margin_bottom = -20.0
+
+[connection signal="update_ammo_count" from="GunPivot/Revolver" to="." method="_on_Revolver_update_ammo_count"]
 [connection signal="area_entered" from="XPCollector" to="." method="_on_XPCollector_area_entered"]

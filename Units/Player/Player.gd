@@ -61,6 +61,14 @@ func _physics_process(delta):
 		$AnimationPlayer.play("Jump")
 	
 	move()
+	
+	# Check for level up
+	if xp >= xp_req:
+		lvl += 1
+		xp -= xp_req
+		xp_req *= xp_req_ramp
+#		print("level up: " + str(lvl))
+		LevelUp.levelup_start(lvl)
 
 func _on_XPCollector_area_entered(area):
 	self.xp += 1
@@ -68,9 +76,14 @@ func _on_XPCollector_area_entered(area):
 func _set_xp(val):
 	xp = val
 	
-	# Check for level up
-	if xp >= xp_req:
-		lvl += 1
-		xp -= xp_req
-		xp_req *= xp_req_ramp
-		print("level up: " + str(lvl))
+#	# Check for level up
+#	if xp >= xp_req:
+#		lvl += 1
+#		xp -= xp_req
+#		xp_req *= xp_req_ramp
+##		print("level up: " + str(lvl))
+#		LevelUp.levelup_start(lvl)
+
+
+func _on_Revolver_update_ammo_count(val):
+	$Label.text = "AMMO: " + str(val)

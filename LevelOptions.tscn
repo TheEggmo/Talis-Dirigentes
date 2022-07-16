@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UpgradeOption.tscn" type="PackedScene" id=2]
+[ext_resource path="res://LevelOptions.gd" type="Script" id=3]
+
+[node name="LevelOptions" type="Control" groups=["LevelOptions"]]
+visible = false
+script = ExtResource( 3 )
+
+[node name="Panel" type="PanelContainer" parent="."]
+margin_left = -320.0
+margin_top = -192.0
+margin_right = 288.0
+margin_bottom = 192.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 601.0
+margin_bottom = 377.0
+alignment = 1
+
+[node name="Option1" parent="Panel/HBoxContainer" instance=ExtResource( 2 )]
+margin_right = 195.0
+
+[node name="Option2" parent="Panel/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 199.0
+margin_right = 394.0
+
+[node name="Option3" parent="Panel/HBoxContainer" instance=ExtResource( 2 )]
+margin_left = 398.0
+margin_right = 594.0
