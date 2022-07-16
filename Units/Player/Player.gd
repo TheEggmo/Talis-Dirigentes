@@ -7,6 +7,11 @@ export var jump_buffer = .1
 export var max_jumps = 1
 onready var jumps_left = max_jumps
 
+var xp = 0 setget _set_xp
+var xp_req = 5
+export var xp_req_ramp = 1.2
+var lvl = 1
+
 func _physics_process(delta):
 	var h_direction = Input.get_action_strength("right") - Input.get_action_strength("left")
 	
@@ -30,9 +35,11 @@ func _physics_process(delta):
 	if h_direction > 0:
 		$Sprite.flip_h = false
 		$GunPivot.rotation_degrees = 0
+		$GunPivot.get_child(0).get_node("Sprite").flip_v = false
 	elif h_direction < 0:
 		$Sprite.flip_h = true
 		$GunPivot.rotation_degrees = 180
+		$GunPivot.get_child(0).get_node("Sprite").flip_v = true
 	
 	# Gravity
 	if is_on_floor():
@@ -55,3 +62,15 @@ func _physics_process(delta):
 	
 	move()
 
+func _on_XPCollector_area_entered(area):
+	self.xp += 1
+
+func _set_xp(val):
+	xp = val
+	
+	# Check for level up
+	if xp >= xp_req:
+		lvl += 1
+		xp -= xp_req
+		xp_req *= xp_req_ramp
+		print("level up: " + str(lvl))

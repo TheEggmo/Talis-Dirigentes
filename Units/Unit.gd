@@ -28,3 +28,4 @@ func move():
 
 func lose_hp(val :int):
 	hp -= val
+	AudioManager.play("res://hit3.ogg")
