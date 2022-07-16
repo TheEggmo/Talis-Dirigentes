@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Fodder.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Units/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Portal/Portal.tscn" type="PackedScene" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://Portal.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Dice.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Dice/Dice.tscn" type="PackedScene" id=4]
+[ext_resource path="res://SpawnController.gd" type="Script" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -34,40 +34,119 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
 [node name="TestLevel" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -24 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Player" parent="." groups=["Player"] instance=ExtResource( 1 )]
+position = Vector2( 0, -24 )
 
-[node name="Fodder" parent="Enemies" instance=ExtResource( 2 )]
-position = Vector2( -336, 32 )
+[node name="Portal" parent="." instance=ExtResource( 2 )]
+
+[node name="Top" parent="Portal" index="0"]
+position = Vector2( 0, -512 )
+
+[node name="Bottom" parent="Portal" index="1"]
+position = Vector2( 0, 512 )
+
+[node name="Enemies" type="Node2D" parent="." groups=["EnemyGroup"]]
+
+[node name="Dices" type="Node2D" parent="." groups=["DiceGroup"]]
+
+[node name="Dice" parent="Dices" instance=ExtResource( 4 )]
+position = Vector2( 216, 112 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 4 )
 cell_size = Vector2( 32, 32 )
 show_collision = true
 format = 1
-tile_data = PoolIntArray( -1245189, 0, 0, -1310716, 0, 0, -1179653, 0, 0, -1245180, 0, 0, -1114117, 0, 0, -1179644, 0, 0, -1048581, 0, 0, -1114108, 0, 0, -983045, 0, 0, -1048572, 0, 0, -917509, 0, 0, -983036, 0, 0, -983035, 0, 0, -851982, 0, 0, -851981, 0, 0, -851980, 0, 0, -851979, 0, 0, -851978, 0, 0, -851977, 0, 0, -851976, 0, 0, -851975, 0, 0, -851974, 0, 0, -851973, 0, 0, -917500, 0, 0, -917499, 0, 0, -917498, 0, 0, -917497, 0, 0, -917496, 0, 0, -917495, 0, 0, -917494, 0, 0, -917493, 0, 0, -917492, 0, 0, -917491, 0, 0, -786446, 0, 0, -851955, 0, 0, -720910, 0, 0, -786419, 0, 0, -655374, 0, 0, -720883, 0, 0, -589838, 0, 0, -589829, 0, 0, -589828, 0, 0, -589827, 0, 0, -589826, 0, 0, -589825, 0, 0, -655360, 0, 0, -655359, 0, 0, -655358, 0, 0, -655357, 0, 0, -655347, 0, 0, -524302, 0, 0, -589811, 0, 0, -458766, 0, 0, -524275, 0, 0, -393230, 0, 0, -393226, 0, 0, -393225, 0, 0, -393224, 0, 0, -393223, 0, 0, -458746, 0, 0, -458745, 0, 0, -458744, 0, 0, -458739, 0, 0, -327694, 0, 0, -393203, 0, 0, -262158, 0, 0, -327667, 0, 0, -196622, 0, 0, -262131, 0, 0, -131086, 0, 0, -131085, 0, 0, -131084, 0, 0, -131083, 0, 0, -131082, 0, 0, -131081, 0, 0, -131080, 0, 0, -131079, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -196597, 0, 0, -196596, 0, 0, -196595, 0, 0, -65550, 0, 0, -131059, 0, 0, -14, 0, 0, -65523, 0, 0, 65522, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 13, 0, 0, 131058, 0, 0, 65549, 0, 0, 196594, 0, 0, 131085, 0, 0, 262130, 0, 0, 196621, 0, 0, 327666, 0, 0, 327667, 0, 0, 327668, 0, 0, 327669, 0, 0, 327670, 0, 0, 327671, 0, 0, 327672, 0, 0, 327673, 0, 0, 327674, 0, 0, 327675, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 393202, 0, 0, 327693, 0, 0, 458738, 0, 0, 393229, 0, 0, 524274, 0, 0, 458765, 0, 0, 589810, 0, 0, 589819, 0, 0, 589820, 0, 0, 589821, 0, 0, 589822, 0, 0, 589823, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524301, 0, 0, 655346, 0, 0, 655351, 0, 0, 655352, 0, 0, 655353, 0, 0, 655354, 0, 0, 655355, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589837, 0, 0, 720882, 0, 0, 655373, 0, 0, 786418, 0, 0, 720909, 0, 0, 851954, 0, 0, 786445, 0, 0, 917490, 0, 0, 917491, 0, 0, 917492, 0, 0, 917493, 0, 0, 917494, 0, 0, 917495, 0, 0, 917496, 0, 0, 917497, 0, 0, 917498, 0, 0, 917499, 0, 0, 851972, 0, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 851978, 0, 0, 851979, 0, 0, 851980, 0, 0, 851981, 0, 0, 983035, 0, 0, 917508, 0, 0, 1048571, 0, 0, 983044, 0, 0, 1114107, 0, 0, 1048580, 0, 0, 1179643, 0, 0, 1114116, 0, 0, 1245179, 0, 0, 1179652, 0, 0 )
+tile_data = PoolIntArray( -1245189, 0, 0, -1310716, 0, 0, -1179653, 0, 0, -1245180, 0, 0, -1114117, 0, 0, -1179644, 0, 0, -1048581, 0, 0, -1114108, 0, 0, -983045, 0, 0, -1048572, 0, 0, -917509, 0, 0, -983036, 0, 0, -983035, 0, 0, -851982, 0, 0, -851981, 0, 0, -851980, 0, 0, -851979, 0, 0, -851978, 0, 0, -851977, 0, 0, -851976, 0, 0, -851975, 0, 0, -851974, 0, 0, -851973, 0, 0, -917500, 0, 0, -917499, 0, 0, -917498, 0, 0, -917497, 0, 0, -917496, 0, 0, -917495, 0, 0, -917494, 0, 0, -917493, 0, 0, -917492, 0, 0, -917491, 0, 0, -786446, 0, 0, -851955, 0, 0, -720910, 0, 0, -786419, 0, 0, -655374, 0, 0, -655362, 0, 0, -655361, 0, 0, -720896, 0, 0, -720895, 0, 0, -720883, 0, 0, -589838, 0, 0, -589829, 0, 0, -589828, 0, 0, -589827, 0, 0, -589826, 0, 0, -589825, 0, 0, -655360, 0, 0, -655359, 0, 0, -655358, 0, 0, -655357, 0, 0, -655356, 0, 0, -655347, 0, 0, -524302, 0, 0, -589811, 0, 0, -458766, 0, 0, -524275, 0, 0, -393230, 0, 0, -393226, 0, 0, -393225, 0, 0, -393224, 0, 0, -393223, 0, 0, -458746, 0, 0, -458745, 0, 0, -458744, 0, 0, -458739, 0, 0, -327694, 0, 0, -393203, 0, 0, -262158, 0, 0, -327667, 0, 0, -196622, 0, 0, -262131, 0, 0, -131086, 0, 0, -131085, 0, 0, -131084, 0, 0, -131083, 0, 0, -131082, 0, 0, -131081, 0, 0, -131080, 0, 0, -131079, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -196597, 0, 0, -196596, 0, 0, -196595, 0, 0, -65550, 0, 0, -131059, 0, 0, -14, 0, 0, -65523, 0, 0, 65522, 0, 0, 65533, 0, 0, 65534, 0, 0, 65535, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 13, 0, 0, 131058, 0, 0, 65549, 0, 0, 196594, 0, 0, 131085, 0, 0, 262130, 0, 0, 196621, 0, 0, 327666, 0, 0, 327667, 0, 0, 327668, 0, 0, 327669, 0, 0, 327670, 0, 0, 327671, 0, 0, 327672, 0, 0, 327673, 0, 0, 327674, 0, 0, 327675, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 393202, 0, 0, 327693, 0, 0, 458738, 0, 0, 393229, 0, 0, 524274, 0, 0, 458765, 0, 0, 589810, 0, 0, 589819, 0, 0, 589820, 0, 0, 589821, 0, 0, 589822, 0, 0, 589823, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524301, 0, 0, 655346, 0, 0, 655351, 0, 0, 655352, 0, 0, 655353, 0, 0, 655354, 0, 0, 655355, 0, 0, 589828, 0, 0, 589829, 0, 0, 589830, 0, 0, 589831, 0, 0, 589832, 0, 0, 589837, 0, 0, 720882, 0, 0, 655373, 0, 0, 786418, 0, 0, 720909, 0, 0, 851954, 0, 0, 786445, 0, 0, 917490, 0, 0, 917491, 0, 0, 917492, 0, 0, 917493, 0, 0, 917494, 0, 0, 917495, 0, 0, 917496, 0, 0, 917497, 0, 0, 917498, 0, 0, 917499, 0, 0, 851972, 0, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 851978, 0, 0, 851979, 0, 0, 851980, 0, 0, 851981, 0, 0, 983035, 0, 0, 917508, 0, 0, 1048571, 0, 0, 983044, 0, 0, 1114107, 0, 0, 1048580, 0, 0, 1179643, 0, 0, 1114116, 0, 0, 1245179, 0, 0, 1179652, 0, 0 )
 
-[node name="Portal" parent="." instance=ExtResource( 4 )]
+[node name="SpawnController" type="Node2D" parent="."]
+script = ExtResource( 8 )
 
-[node name="Top" parent="Portal" index="0"]
-position = Vector2( 0, -488 )
+[node name="SpawnTimer" type="Timer" parent="SpawnController"]
+autostart = true
 
-[node name="CollisionShape2D" parent="Portal/Top" index="0"]
-position = Vector2( 0, -22 )
+[node name="Positions" type="Node2D" parent="SpawnController"]
 
-[node name="Bottom" parent="Portal" index="1"]
-position = Vector2( 0, 488 )
+[node name="Position2D" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 0, -384 )
 
-[node name="CollisionShape2D" parent="Portal/Bottom" index="0"]
-position = Vector2( 0, 27 )
+[node name="Position2D2" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( -352, -352 )
 
-[node name="Dice" parent="." instance=ExtResource( 5 )]
-position = Vector2( 168, 72 )
-mass = 1.0
+[node name="Position2D3" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 360, -352 )
+
+[node name="Position2D4" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 0, -192 )
+
+[node name="Position2D5" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( -256, 0 )
+
+[node name="Position2D6" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( -352, 0 )
+
+[node name="Position2D7" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 352, 0 )
+
+[node name="Position2D8" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 256, 0 )
+
+[node name="Position2D9" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 0, 64 )
+
+[node name="Position2D10" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 0, 192 )
+
+[node name="Position2D11" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( -256, 192 )
+
+[node name="Position2D12" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( -352, 224 )
+
+[node name="Position2D13" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( -352, 320 )
+
+[node name="Position2D15" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 352, 320 )
+
+[node name="Position2D16" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 352, 224 )
+
+[node name="Position2D17" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 256, 192 )
+
+[node name="Position2D18" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 192, 352 )
+
+[node name="Position2D19" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( -192, 352 )
+
+[node name="Position2D20" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( -256, -128 )
+
+[node name="Position2D21" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 352, -160 )
+
+[node name="Position2D24" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 256, -256 )
+
+[node name="Position2D25" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( -256, -256 )
+
+[node name="Position2D22" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( -352, -160 )
+
+[node name="Position2D23" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 256, -128 )
+
+[node name="Position2D14" type="Position2D" parent="SpawnController/Positions"]
+position = Vector2( 0, 328 )
+
+[node name="Spawners" type="Node2D" parent="SpawnController" groups=["SpawnerGroup"]]
+
+[connection signal="timeout" from="SpawnController/SpawnTimer" to="SpawnController" method="_on_SpawnTimer_timeout"]
 
 [editable path="Portal"]

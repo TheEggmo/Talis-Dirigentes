@@ -18,11 +18,6 @@ func h_movement(delta, h_direction):
 	
 	# Horizontal movement
 	velocity.x += h_direction * move_speed * (delta + 1)
-	
-	# Gravity 
-	velocity.y += gravity
-	if is_on_floor():
-		velocity.y = 0
 
 func jump():
 	# Jumping

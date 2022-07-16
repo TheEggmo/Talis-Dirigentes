@@ -1,14 +1,44 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Fodder.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Unit
+
+var walk_direction
+
+func _ready():
+	walk_direction = 1
+	hp = 1
+
+func _physics_process(delta):
+	h_movement(delta, walk_direction)
+	# Gravity 
+	velocity.y += gravity
+	# Gravity buildup cancel
+	if is_on_floor():
+		velocity.y = 0
+	move()
+	
+	if is_on_wall():
+		walk_direction *= -1
+		velocity.x = 0
+	
+	if hp <= 0:
+		queue_free()
+
+
+func _on_Hurtbox_area_entered(area):
+	hp -= 1
+
+"
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
 [node name="Fodder" type="KinematicBody2D"]
 collision_layer = 2
-script = ExtResource( 1 )
+script = SubResource( 2 )
 move_speed = 30
 
 [node name="Sprite" type="Sprite" parent="."]

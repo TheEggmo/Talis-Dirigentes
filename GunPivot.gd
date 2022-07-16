@@ -2,7 +2,10 @@ extends Node2D
 
 var bullets = 6
 
-var bullet_scene = preload("res://Bullet.tscn")
+var bullet_scene = preload("res://Units/Player/Guns/Revolver/Bullet.tscn")
+
+func _ready():
+	EventBus.connect("dice_rolled", self, "reload")
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("shoot") and bullets > 0:
@@ -16,3 +19,6 @@ func spawn_bullet(direction :Vector2):
 	bullet_instance.global_position = $Gun.global_position
 	bullet_instance.set_as_toplevel(true)
 	add_child(bullet_instance)
+
+func reload(val):
+	bullets = val

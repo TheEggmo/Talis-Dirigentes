@@ -8,6 +8,11 @@ func _ready():
 
 func _physics_process(delta):
 	h_movement(delta, walk_direction)
+	# Gravity 
+	velocity.y += gravity
+	# Gravity buildup cancel
+	if is_on_floor():
+		velocity.y = 0
 	move()
 	
 	if is_on_wall():
