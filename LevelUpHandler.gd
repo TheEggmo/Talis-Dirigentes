@@ -3,6 +3,8 @@ extends Node
 signal levelup(upg_type)
 signal end_levelup
 
+var can_juggle = false
+
 enum UpgradeType{
 	PLAYER,
 	WEAPON,
@@ -21,10 +23,11 @@ enum Options{
 
 func levelup_start(player_level):
 	AudioManager.play("res://Audio/powerup3.wav")
+	EventBus.emit_signal("update_lvl_hud", player_level)
 	pause(true)
-	if player_level in [5, 10]:
+	if player_level in [10, 20]:
 		emit_signal("levelup", UpgradeType.DICE)
-	elif player_level in [3,7]:
+	elif player_level in [4,8]:
 		emit_signal("levelup", UpgradeType.WEAPON)
 	else:
 		emit_signal("levelup", UpgradeType.PLAYER)
@@ -32,20 +35,21 @@ func levelup_start(player_level):
 
 func levelup_end(selected_option :int):
 	var player :Player = get_tree().get_nodes_in_group("Player")[0]
+	var gun :Gun = get_tree().get_nodes_in_group("Gun")[0]
 	match selected_option:
 		Options.HEALTH:
 			player.hp += 3
 		Options.JUMP:
 			player.max_jumps += 1
 		Options.AMMO:
-			var gun :Gun =get_tree().get_nodes_in_group("Gun")[0]
 			gun.max_bullets += 2
 		Options.WEAPON1:
-			print("weapon upgrade missing")
+			gun.has_upg_1 = true
 		Options.WEAPON2:
-			print("weapon upgrade missing")
+			gun.has_upg_2 = true
 		Options.WEAPON3:
-			print("weapon upgrade missing")
+			gun.has_upg_3 = true
+			can_juggle = true
 		Options.DICE:
 			get_tree().get_nodes_in_group("DiceSpawner")[0].spawn_dice()
 	

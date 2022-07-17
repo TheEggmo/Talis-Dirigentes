@@ -51,7 +51,7 @@ extents = Vector2( 16, 16 )
 [node name="Dice" type="RigidBody2D"]
 collision_layer = 32
 physics_material_override = SubResource( 2 )
-gravity_scale = 3.0
+gravity_scale = 5.0
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -75,7 +75,7 @@ shape = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 140
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false
@@ -84,5 +84,6 @@ shape = SubResource( 5 )
 [node name="FaceChangeTimer" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="FaceChangeTimer" to="." method="_on_FaceChangeTimer_timeout"]

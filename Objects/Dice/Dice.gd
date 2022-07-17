@@ -6,6 +6,7 @@ var additional_v_launch_force = 250
 var warp = false
 var launched = false setget _set_launched
 var roll_speed 
+var allow_bullet_launch = false setget ,_get_allow
 
 func _ready():
 	EventBus.connect("game_end", self, "set_visible", [false])
@@ -16,7 +17,7 @@ func _integrate_forces(state):
 		warp = false
 #	print(linear_velocity)
 	if launched:
-		if linear_velocity.length() < 10:
+		if linear_velocity.length() < 15:
 			roll()
 			self.launched = false
 	else:
@@ -35,7 +36,7 @@ func _on_Area2D_body_entered(body :Unit):
 func roll():
 #	var roll = randi()%6 + 1
 	var roll = $AnimatedSprite.frame + 1
-	print("roll: " + str(roll))
+	EventBus.spawn_text("ROLL: " + str(roll), global_position)
 	EventBus.emit_signal("dice_rolled", roll)
 	$FaceChangeTimer.stop()
 	$AnimatedSprite.frame = roll - 1
@@ -64,3 +65,12 @@ func _set_launched(val):
 		$FaceChangeTimer.start(.1)
 	else:
 		$FaceChangeTimer.stop()
+
+func _get_allow():
+	return LevelUp.can_juggle
+
+
+func _on_Area2D_area_entered(area):
+	if self.allow_bullet_launch:
+		var launch_direction = area.global_position.direction_to(global_position)
+		apply_central_impulse(launch_direction * launch_force - Vector2(0,additional_v_launch_force))

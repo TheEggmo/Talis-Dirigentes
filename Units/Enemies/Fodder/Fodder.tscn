@@ -101,7 +101,7 @@ shape = SubResource( 13 )
 [node name="Hurtbox" type="Area2D" parent="."]
 scale = Vector2( 0.5, 0.5 )
 collision_layer = 0
-collision_mask = 8
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource( 1 )
@@ -118,3 +118,5 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( 0, -1 )
 shape = SubResource( 12 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

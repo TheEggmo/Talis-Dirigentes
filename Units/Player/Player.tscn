@@ -276,12 +276,6 @@ visible = false
 modulate = Color( 0.0705882, 0.882353, 0.0431373, 1 )
 shape = SubResource( 15 )
 
-[node name="Label" type="Label" parent="."]
-margin_left = -20.0
-margin_top = -34.0
-margin_right = 20.0
-margin_bottom = -20.0
-
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 16

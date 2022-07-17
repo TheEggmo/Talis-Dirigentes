@@ -29,8 +29,7 @@ func _physics_process(delta):
 		destroy()
 
 func _on_Hurtbox_area_entered(area):
-	AudioManager.play("res://Audio/hit3.wav")
-	hp -= 1
+	lose_hp(1)
 
 func destroy():
 	var xp_instance = xp_scene.instance()

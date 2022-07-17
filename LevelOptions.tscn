@@ -30,3 +30,7 @@ margin_right = 394.0
 [node name="Option3" parent="Panel/HBoxContainer" instance=ExtResource( 2 )]
 margin_left = 398.0
 margin_right = 594.0
+
+[connection signal="selected_option" from="Panel/HBoxContainer/Option1" to="." method="_on_Option1_selected_option"]
+[connection signal="selected_option" from="Panel/HBoxContainer/Option2" to="." method="_on_Option2_selected_option"]
+[connection signal="selected_option" from="Panel/HBoxContainer/Option3" to="." method="_on_Option3_selected_option"]

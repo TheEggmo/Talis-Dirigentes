@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://Units/Player/Guns/Revolver/Bullet.gd"
+}, {
 "base": "Unit",
 "class": "Enemy",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://Units/Unit.gd"
 } ]
 _global_script_class_icons={
+"Bullet": "",
 "Enemy": "",
 "Gun": "",
 "Player": "",
@@ -128,6 +134,7 @@ shoot={
 2d_physics/layer_5="EnemyAttack"
 2d_physics/layer_6="Dice"
 2d_physics/layer_7="XP"
+2d_physics/layer_8="Explosion"
 
 [physics]
 
