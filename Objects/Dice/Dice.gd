@@ -15,7 +15,6 @@ func _integrate_forces(state):
 	if warp:
 		global_position *= -1
 		warp = false
-#	print(linear_velocity)
 	if launched:
 		if linear_velocity.length() < 15:
 			roll()
@@ -24,17 +23,8 @@ func _integrate_forces(state):
 		if linear_velocity.length() > 300:
 			self.launched = true
 	roll_speed = 15/linear_velocity.length()
-#	print(linear_velocity.length())
-
-
-func _on_Area2D_body_entered(body :Unit):
-	if body is Player:
-		var launch_direction = body.global_position.direction_to(global_position)
-		apply_central_impulse(launch_direction * launch_force - Vector2(0,additional_v_launch_force))
-
 
 func roll():
-#	var roll = randi()%6 + 1
 	var roll = $AnimatedSprite.frame + 1
 	EventBus.spawn_text("ROLL: " + str(roll), global_position)
 	EventBus.emit_signal("dice_rolled", roll)
@@ -69,8 +59,19 @@ func _set_launched(val):
 func _get_allow():
 	return LevelUp.can_juggle
 
-
 func _on_Area2D_area_entered(area):
 	if self.allow_bullet_launch:
 		var launch_direction = area.global_position.direction_to(global_position)
 		apply_central_impulse(launch_direction * launch_force - Vector2(0,additional_v_launch_force))
+		AudioManager.play("res://Audio/dice2.wav")
+
+func _on_Area2D_body_entered(body :Unit):
+	if body is Player:
+		var launch_direction = body.global_position.direction_to(global_position)
+		apply_central_impulse(launch_direction * launch_force - Vector2(0,additional_v_launch_force))
+		AudioManager.play("res://Audio/dice2.wav")
+
+
+func _on_Dice_body_entered(body):
+	if launched:
+		$AudioStreamPlayer2D.play()

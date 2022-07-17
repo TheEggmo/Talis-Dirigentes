@@ -23,9 +23,9 @@ func spawn_bullet(direction :Vector2):
 func reload(val):
 	.reload(val)
 	
-	if !explosive and val == 6:
+	if !explosive and val % 2 == 0 and has_upg_1:
 		explosive = true
-	if !piercing and val == 1:
+	if !piercing and val % 2 == 1 and has_upg_2:
 		piercing = true
 
 func _set_bullets(val):

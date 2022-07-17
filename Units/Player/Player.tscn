@@ -222,7 +222,7 @@ radius = 16.0
 collision_layer = 4
 script = ExtResource( 3 )
 max_fall_speed = 500
-hp = 3
+hp = 50
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 3, 3 )

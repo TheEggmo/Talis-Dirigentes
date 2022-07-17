@@ -1,8 +1,7 @@
-extends Unit
+extends Enemy
 
 onready var walk_direction = 1 if randi() % 2 else -1
-
-var xp_scene = preload("res://Objects/XP/XP.tscn")
+#var walk_direction :int
 
 func _ready():
 	hp = 1
@@ -31,8 +30,3 @@ func _physics_process(delta):
 func _on_Hurtbox_area_entered(area):
 	lose_hp(1)
 
-func destroy():
-	var xp_instance = xp_scene.instance()
-	xp_instance.global_position = global_position
-	get_tree().get_nodes_in_group("XPGroup")[0].add_child(xp_instance)
-	queue_free()

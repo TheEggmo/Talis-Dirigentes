@@ -49,3 +49,4 @@ func _set_bullets(val):
 	EventBus.emit_signal("update_ammo_hud", bullets)
 	if bullets <= 0:
 		AudioManager.play("res://Audio/empty1.wav")
+		EventBus.spawn_text("EMPTY", global_position)

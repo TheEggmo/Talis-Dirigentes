@@ -2,6 +2,9 @@ extends Node2D
 
 export var time_to_spawn = 3
 var enemy_scene = preload("res://Units/Enemies/Fodder/Fodder.tscn")
+var ghost_scene = preload("res://Units/Enemies/Ghost/Ghost.tscn")
+
+export var ghost_chance = 0.15
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Rotate":
@@ -14,7 +17,12 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$AnimationPlayer.play("Spawn")
 
 func spawn():
-	var enemy_instance = enemy_scene.instance()
+	var enemy_instance
+	if randi() % 100 > 100*ghost_chance:
+		enemy_instance = enemy_scene.instance()
+	else:
+		enemy_instance = ghost_scene.instance()
+	
 	enemy_instance.global_position = global_position
 	var enemy_group = get_tree().get_nodes_in_group("EnemyGroup")
 	if !enemy_group.empty():

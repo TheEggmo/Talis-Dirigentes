@@ -4,6 +4,7 @@ var start_time
 var end_time
 
 func _ready():
+	$ColorRect.visible = true
 	EventBus.connect("game_end", self, "show_hud")
 	hide()
 	$Text.hide()
@@ -22,7 +23,7 @@ func _on_Timer_timeout():
 	var seconds = fmod(run_time, 60)
 	var minutes = (run_time - seconds) / 60
 	
-	$Text/Label.text = "You survived for:\n %s minutes, %s seconds!" % [str(minutes), str(seconds)]
+	$Text/Label.text = "You survived for:\n %s minutes, %s seconds!" % [str(minutes), str(round(seconds))]
 
 
 func _on_Button_pressed():

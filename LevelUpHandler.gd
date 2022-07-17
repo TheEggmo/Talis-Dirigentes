@@ -38,7 +38,8 @@ func levelup_end(selected_option :int):
 	var gun :Gun = get_tree().get_nodes_in_group("Gun")[0]
 	match selected_option:
 		Options.HEALTH:
-			player.hp += 3
+			player.hp += 2
+			EventBus.emit_signal("update_hp_hud", player.hp)
 		Options.JUMP:
 			player.max_jumps += 1
 		Options.AMMO:

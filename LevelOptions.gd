@@ -6,10 +6,10 @@ var upgrades_text ={
 	LevelUp.Options.HEALTH : ["Health Up", "Increases your health", LevelUp.Options.HEALTH],
 	LevelUp.Options.JUMP : ["Jump Up", "Increases the amount of jumps you can perform without touching the ground.", LevelUp.Options.JUMP],
 	LevelUp.Options.AMMO : ["Ammo", "Increases your maximum gun ammo.", LevelUp.Options.AMMO],
-	LevelUp.Options.DICE : ["Dice up", "Gain an additional dice", LevelUp.Options.DICE],
-	LevelUp.Options.WEAPON1 : ["Sixth chamber", "Rolling a 6 grants you explosive shots until you roll again.", LevelUp.Options.WEAPON1],
-	LevelUp.Options.WEAPON2 : ["Snake shot", "Rolling 1 gives you piercing shots until you roll again.", LevelUp.Options.WEAPON2],
-	LevelUp.Options.WEAPON3 : ["Clay pigeon", "Shooting the dice launches it and increases the next roll by 1", LevelUp.Options.WEAPON3],
+	LevelUp.Options.DICE : ["Dice up", "Gain an additional die", LevelUp.Options.DICE],
+	LevelUp.Options.WEAPON1 : ["Sixth chamber", "Rolling an even number grants you explosive shots until you run out of bullets.", LevelUp.Options.WEAPON1],
+	LevelUp.Options.WEAPON2 : ["Snake shot", "Rolling an odd number gives you piercing shots until you run out of bullets.", LevelUp.Options.WEAPON2],
+	LevelUp.Options.WEAPON3 : ["Clay pigeon", "Shooting a die launches it.", LevelUp.Options.WEAPON3],
 }
 
 func _ready():

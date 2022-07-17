@@ -5,6 +5,7 @@ func _ready():
 	EventBus.connect("update_hp_hud", self, "update_hp")
 	EventBus.connect("update_lvl_hud", self, "update_lvl")
 	EventBus.connect("update_xp_hud", self, "update_xp")
+	randomize()
 
 func update_ammo(val):
 	$Label.text = "AMMO:" + str(val)
