@@ -9,7 +9,7 @@ export var max_h_velocity = 500
 
 var velocity := Vector2.ZERO
 
-var hp = 1
+export var hp = 1
 
 func h_movement(delta, h_direction):
 	# Friction
@@ -21,11 +21,11 @@ func h_movement(delta, h_direction):
 
 func jump():
 	# Jumping
-	velocity.y -= jump_force
+	velocity.y = min(-jump_force, velocity.y - jump_force)
 
 func move():
 	move_and_slide(velocity, Vector2.UP)
 
 func lose_hp(val :int):
 	hp -= val
-	AudioManager.play("res://hit3.ogg")
+	AudioManager.play("res://Audio/hit2.wav")

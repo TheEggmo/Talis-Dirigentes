@@ -23,5 +23,5 @@ func _on_CollectionArea_body_entered(body):
 	if body is Player:
 		$VanishTimer.start()
 		visible = false
-		AudioManager.play("res://coin2.wav")
+		AudioManager.play("res://Audio/coin2.wav")
 		$CollectionArea.queue_free()

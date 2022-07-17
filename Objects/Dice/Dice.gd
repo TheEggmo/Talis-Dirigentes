@@ -7,6 +7,9 @@ var warp = false
 var launched = false setget _set_launched
 var roll_speed 
 
+func _ready():
+	EventBus.connect("game_end", self, "set_visible", [false])
+
 func _integrate_forces(state):
 	if warp:
 		global_position *= -1
@@ -39,11 +42,19 @@ func roll():
 
 
 func _on_FaceChangeTimer_timeout():
+	var randomrolls = false
+	
 	var cur_face = $AnimatedSprite.frame
 	var frame_count = $AnimatedSprite.frames.get_frame_count("default")
-	var new_face = randi() % frame_count
-	while(new_face == cur_face):
+	
+	var new_face
+	if randomrolls:
 		new_face = randi() % frame_count
+		while(new_face == cur_face):
+			new_face = randi() % frame_count
+	else:
+		new_face = (cur_face + 1) % frame_count
+		
 	$AnimatedSprite.frame = new_face
 	$FaceChangeTimer.start(roll_speed)
 

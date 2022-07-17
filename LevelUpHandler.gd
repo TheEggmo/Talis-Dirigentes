@@ -20,6 +20,7 @@ enum Options{
 }
 
 func levelup_start(player_level):
+	AudioManager.play("res://Audio/powerup3.wav")
 	pause(true)
 	if player_level in [5, 10]:
 		emit_signal("levelup", UpgradeType.DICE)

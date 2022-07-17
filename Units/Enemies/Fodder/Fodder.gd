@@ -29,7 +29,7 @@ func _physics_process(delta):
 		destroy()
 
 func _on_Hurtbox_area_entered(area):
-	AudioManager.play("res://hit3.ogg")
+	AudioManager.play("res://Audio/hit3.wav")
 	hp -= 1
 
 func destroy():

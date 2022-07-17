@@ -1,6 +1,6 @@
 extends Node
 
-var num_players = 8
+var num_players = 20
 var bus = "master"
 
 var available = []  # The available players.
@@ -8,6 +8,7 @@ var queue = []  # The queue of sounds to play.
 
 
 func _ready():
+	pause_mode = PAUSE_MODE_PROCESS
 	# Create the pool of AudioStreamPlayer nodes.
 	for i in num_players:
 		var p = AudioStreamPlayer.new()
