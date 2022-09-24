@@ -744,7 +744,7 @@ margin_top = 424.0
 margin_right = 402.0
 margin_bottom = 467.0
 custom_fonts/font = ExtResource( 11 )
-text = "ver 1.0"
+text = "ver 1.1"
 align = 1
 
 [connection signal="timeout" from="Node2D/Hud/GameOverHud/Timer" to="Node2D/Hud/GameOverHud" method="_on_Timer_timeout"]

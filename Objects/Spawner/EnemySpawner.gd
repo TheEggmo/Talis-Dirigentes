@@ -6,6 +6,13 @@ var ghost_scene = preload("res://Units/Enemies/Ghost/Ghost.tscn")
 
 export var ghost_chance = 0.15
 
+var spawn_ghost := false
+
+func _ready():
+	if randi() % 100 <= 100*ghost_chance:
+		spawn_ghost = true
+		$Sprite.self_modulate = Color8(20,20,250)
+
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Rotate":
 		time_to_spawn -= 1
@@ -18,10 +25,10 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func spawn():
 	var enemy_instance
-	if randi() % 100 > 100*ghost_chance:
-		enemy_instance = enemy_scene.instance()
-	else:
+	if spawn_ghost:
 		enemy_instance = ghost_scene.instance()
+	else:
+		enemy_instance = enemy_scene.instance()
 	
 	enemy_instance.global_position = global_position
 	var enemy_group = get_tree().get_nodes_in_group("EnemyGroup")

@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Units/Player/player_white.png" type="Texture" id=1]
 [ext_resource path="res://Units/Player/PlayerDeath.gd" type="Script" id=2]
 [ext_resource path="res://Objects/Spawner/particle.png" type="Texture" id=3]
+[ext_resource path="res://ColorPurge.tres" type="Material" id=4]
+[ext_resource path="res://Objects/Spawner/spawner_exit.png" type="Texture" id=5]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -114,6 +116,30 @@ tracks/8/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite2:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite2:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "Run"
@@ -128,7 +154,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ -230.0, 180.0 ]
+"values": [ -230.0, 270.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Node2D/Polygon2D2:rotation_degrees")
@@ -214,6 +240,30 @@ tracks/7/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite2:scale")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 3, 3 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite2:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Curve" id=15]
 max_value = 4.0
@@ -228,10 +278,10 @@ flag_disable_z = true
 direction = Vector3( 0, 0, 1 )
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 150.0
+initial_velocity = 250.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-damping = 37.21
+damping = 80.0
 scale = 0.5
 scale_random = 0.47
 scale_curve = SubResource( 14 )
@@ -253,12 +303,14 @@ anims/Run = SubResource( 2 )
 [node name="Particles2D2" type="Particles2D" parent="."]
 emitting = false
 amount = 30
+lifetime = 3.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 16 )
 texture = ExtResource( 3 )
 
 [node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 0, -3 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Node2D"]
 polygon = PoolVector2Array( 0, 0, 1500, -160, 1500, 160 )
@@ -270,3 +322,9 @@ polygon = PoolVector2Array( 0, 0, 1500, -160, 1500, 160 )
 [node name="Polygon2D3" type="Polygon2D" parent="Node2D"]
 rotation = -2.29511
 polygon = PoolVector2Array( 0, 0, 1500, -160, 1500, 160 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+material = ExtResource( 4 )
+position = Vector2( 0, -3 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 5 )

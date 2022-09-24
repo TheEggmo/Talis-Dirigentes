@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=2]
+code = "// Clears the given color from the sprite
+shader_type canvas_item;
+
+uniform vec4 unwanted_color = vec4(0, 0, 0, 1);
+
+void fragment(){
+	COLOR = texture(TEXTURE, UV);
+	if (COLOR == unwanted_color){
+		COLOR.a = 0.0;
+	}
+}"
+
+[resource]
+shader = SubResource( 2 )
+shader_param/unwanted_color = Plane( 0, 0, 0, 1 )

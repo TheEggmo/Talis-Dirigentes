@@ -30,3 +30,6 @@ func _physics_process(delta):
 func _on_Hurtbox_area_entered(area):
 	lose_hp(1)
 
+func destroy():
+	spawn_xp()
+	.destroy()

@@ -16,6 +16,12 @@ func _physics_process(delta):
 		destroy()
 
 func destroy():
-	spawn_xp()
-	spawn_xp()
+	var spawn_offset = Vector2(15, 0).rotated(rand_range(0, 6.28))
+	spawn_xp(spawn_offset)
+	spawn_xp(spawn_offset.rotated(2.09333))
+	spawn_xp(spawn_offset.rotated(-2.09333))
 	.destroy()
+
+
+func _on_Hurtbox_area_entered(area):
+	lose_hp(1)
